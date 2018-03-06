@@ -160,9 +160,6 @@ def run_inference_on_image(image):
     tf.logging.fatal('File does not exist %s', image)
   image_data = tf.gfile.FastGFile(image, 'rb').read()
 
-  # Creates graph from saved GraphDef.
-  create_graph()
-
   with tf.Session() as sess:
     # Some useful tensors:
     # 'softmax:0': A tensor containing the normalized prediction across
@@ -210,6 +207,9 @@ def main(_):
   maybe_download_and_extract()
   image = (FLAGS.image_file if FLAGS.image_file else
            os.path.join(FLAGS.model_dir, 'cropped_panda.jpg'))
+  # Creates graph from saved GraphDef.
+  create_graph()
+
   while(1):
     camera_capture = get_image()
     file = "test_image.png"
