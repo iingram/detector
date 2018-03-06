@@ -41,6 +41,24 @@ import re
 import sys
 import tarfile
 
+########## begin camera capture setup section
+import cv2
+
+camera_port = 0 
+camera = cv2.VideoCapture(camera_port)
+
+# remainder of this section solves a bug where camera's auto-exposure
+# won't have taken action until after a healthy number of frames have
+# been captured
+ramp_frames = 30
+def get_image():
+  retval, im = camera.read()
+  return im
+
+for i in xrange(ramp_frames):
+  temp = get_image()
+############ end camera capture setup section
+
 import numpy as np
 from six.moves import urllib
 import tensorflow as tf
@@ -192,7 +210,12 @@ def main(_):
   maybe_download_and_extract()
   image = (FLAGS.image_file if FLAGS.image_file else
            os.path.join(FLAGS.model_dir, 'cropped_panda.jpg'))
-  run_inference_on_image(image)
+  while(1):
+    camera_capture = get_image()
+    file = "test_image.png"
+    cv2.imwrite(file, camera_capture)
+    run_inference_on_image('test_image.png')
+    print('********')
 
 
 if __name__ == '__main__':
