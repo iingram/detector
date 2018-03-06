@@ -45,6 +45,8 @@ import numpy as np
 from six.moves import urllib
 import tensorflow as tf
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 FLAGS = None
 
 # pylint: disable=line-too-long
