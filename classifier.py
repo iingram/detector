@@ -46,7 +46,7 @@ from __future__ import print_function
 
 # SETTINGS
 # location of model:
-model_dir = '/tmp/imagenet'
+model_dir = '/home/ian/Desktop/Dropbox/animalDetector/imagenet'
 # how many predictions to report in output list
 num_top_predictions = 3
 
