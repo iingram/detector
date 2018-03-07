@@ -2,10 +2,10 @@
 # in a realish-time detector for particular subsets of the known
 # labels.
 
-# won't work unless the model has already been downloaded.  currently
-# to the place the tutorial put it by default: /tmp/imagenet/
+# won't work unless the model has already been downloaded.
 
-# some things that used to be in FLAGS are for the time being hardcoded
+# things that used to be in FLAGS are hardcoded in variables near top
+# of script
 
 # Copyright 2015 The TensorFlow Authors. All Rights Reserved.
 #
@@ -44,6 +44,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+# SETTINGS
+# location of model:
+model_dir = '/tmp/imagenet'
+# how many predictions to report in output list
+num_top_predictions = 3
+
 import argparse
 import os.path
 import re
@@ -55,8 +61,6 @@ from six.moves import urllib
 import tensorflow as tf
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
-#FLAGS = None
 
 # pylint: disable=line-too-long
 DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
@@ -71,10 +75,10 @@ class NodeLookup(object):
                uid_lookup_path=None):
     if not label_lookup_path:
       label_lookup_path = os.path.join(
-          '/tmp/imagenet', 'imagenet_2012_challenge_label_map_proto.pbtxt')
+          model_dir, 'imagenet_2012_challenge_label_map_proto.pbtxt')
     if not uid_lookup_path:
       uid_lookup_path = os.path.join(
-          '/tmp/imagenet', 'imagenet_synset_to_human_label_map.txt')
+          model_dir, 'imagenet_synset_to_human_label_map.txt')
     self.node_lookup = self.load(label_lookup_path, uid_lookup_path)
 
   def load(self, label_lookup_path, uid_lookup_path):
@@ -132,7 +136,7 @@ def create_graph():
   """Creates a graph from saved GraphDef file and returns a saver."""
   # Creates graph from saved graph_def.pb.
   with tf.gfile.FastGFile(os.path.join(
-      '/tmp/imagenet', 'classify_image_graph_def.pb'), 'rb') as f:
+      model_dir, 'classify_image_graph_def.pb'), 'rb') as f:
     graph_def = tf.GraphDef()
     graph_def.ParseFromString(f.read())
     _ = tf.import_graph_def(graph_def, name='')
@@ -171,7 +175,7 @@ def run_inference_on_image(image):
     # Creates node ID --> English string lookup.
     node_lookup = NodeLookup()
 
-    top_k = predictions.argsort()[-5:][::-1]
+    top_k = predictions.argsort()[-num_top_predictions:][::-1]
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id)
       score = predictions[node_id]
