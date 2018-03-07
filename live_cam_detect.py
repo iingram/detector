@@ -25,4 +25,13 @@ if __name__ == '__main__':
     print('Vote is ' + str(vote))
     print('********')
 
+    ### uncomment this section if you want to see the images that
+    ### detector classified.  if you do invoke this section, loop will
+    ### pause on each image till keystroke, ESC will quit the program
+    #cv2.imshow('image', camera_capture)
+    #k = cv2.waitKey(0)
+    #if k == 27:         # wait for ESC key to exit
+    #  cv2.destroyAllWindows()
+    #  break
+    ### end of optional image display section
 
