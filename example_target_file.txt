@@ -1,2 +1,5 @@
 coffee mug
 spatula
+banana
+orange
+hammer
