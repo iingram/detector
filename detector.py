@@ -20,7 +20,13 @@
 
 from classifier import *
 
-target_labels = ['coffee mug', 'spatula']  # can you tell I am doing this in my kitchen?
+target_filename = "example_target_file.txt"
+
+with open(target_filename, 'r') as f:
+  target_labels = [line.rstrip('\n') for line in f]
+
+#target_labels = ['coffee mug', 'spatula']  # can you tell I am doing this in my kitchen?
+
 
 def detector(image):
   veryToppist = run_inference_on_image(image)
@@ -29,7 +35,7 @@ def detector(image):
   # score from classifier.  provide label of match for use by apps.
   match = next((x for x in target_labels if x in veryToppist), False)
   if(match is False):
-    return (False, "Nothing")
+    return (False, "No target")
   else:
     return (True, match)
 

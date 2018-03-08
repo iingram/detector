@@ -40,7 +40,7 @@ if __name__ == '__main__':
     file = "test_image.png"
     cv2.imwrite(file, camera_capture)
     vote, target_label = detector('test_image.png')
-    print(target_label + ' is present: ' + str(vote))
+    print(target_label + ' is present.')
     
     end = time.time()
     print('Elapsed Time: ' + str(end - start)) # print out how long this detection cycle took
