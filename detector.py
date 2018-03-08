@@ -20,15 +20,19 @@
 
 from classifier import *
 
-target_label = 'coffee mug'
+target_labels = ['coffee mug', 'spatula']  # can you tell I am doing this in my kitchen?
 
 def detector(image):
   veryToppist = run_inference_on_image(image)
-  #if any(x in veryToppist for x in target_labels):
-  if(target_label in veryToppist):
-    return (True, target_label)
+
+  # check for any of the target_labels in the category with highest
+  # score from classifier.  provide label of match for use by apps.
+  match = next((x for x in target_labels if x in veryToppist), False)
+  if(match is False):
+    return (False, "Nothing")
   else:
-    return (False, target_label)
+    return (True, match)
+
 
 
 

@@ -61,6 +61,6 @@ if __name__ == '__main__':
     ### images for which detector has voted True
     #if(vote):
     #  detections_count += 1
-    #  file = target_label + "_" str(detections_count) + ".png"
+    #  file = target_label + "_" + str(detections_count) + ".png"
     #  cv2.imwrite(file, camera_capture)
     ### end of optional image logging section
