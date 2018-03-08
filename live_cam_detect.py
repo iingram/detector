@@ -2,6 +2,7 @@
 
 import cv2
 from detector import *
+import time
 
 if __name__ == '__main__':
   camera_port = 0 
@@ -18,11 +19,17 @@ if __name__ == '__main__':
   create_graph()
   
   while(1):
+    start = time.time() # want to time each cycle. starting stopwatch.
+
     retval, camera_capture = camera.read()
     file = "test_image.png"
     cv2.imwrite(file, camera_capture)
     vote = detector('test_image.png')
     print('Vote is ' + str(vote))
+    
+    end = time.time()
+    print('Elapsed Time: ' + str(end - start)) # print out how long this detection cycle took
+
     print('********')
 
     ### uncomment this section if you want to see the images that
