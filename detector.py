@@ -20,13 +20,15 @@
 
 from classifier import *
 
+target_label = 'coffee mug'
 
-def detector(image, target_label):
+def detector(image):
   veryToppist = run_inference_on_image(image)
+  #if any(x in veryToppist for x in target_labels):
   if(target_label in veryToppist):
-    return True
+    return (True, target_label)
   else:
-    return False
+    return (False, target_label)
 
 
 

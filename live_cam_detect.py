@@ -4,7 +4,6 @@ import cv2
 from detector import *
 import time
 
-target_label = 'coffee mug'
 detections_count = 0 #currently only used if logging frames that detector marked as True
 
 if __name__ == '__main__':
@@ -40,8 +39,8 @@ if __name__ == '__main__':
     retval, camera_capture = camera.read()
     file = "test_image.png"
     cv2.imwrite(file, camera_capture)
-    vote = detector('test_image.png', target_label)
-    print('Vote is ' + str(vote))
+    vote, target_label = detector('test_image.png')
+    print(target_label + ' is present: ' + str(vote))
     
     end = time.time()
     print('Elapsed Time: ' + str(end - start)) # print out how long this detection cycle took
@@ -62,5 +61,6 @@ if __name__ == '__main__':
     ### images for which detector has voted True
     #if(vote):
     #  detections_count += 1
-    #  file = target_label + "_" + str(detections_count) + ".png"
+    #  file = target_label + "_" str(detections_count) + ".png"
     #  cv2.imwrite(file, camera_capture)
+    ### end of optional image logging section
