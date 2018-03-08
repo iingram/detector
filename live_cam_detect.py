@@ -21,6 +21,19 @@ if __name__ == '__main__':
   while(1):
     start = time.time() # want to time each cycle. starting stopwatch.
 
+    # these next three lines take a set of throw-away frames as this
+    # hack gets camera caught up to the present (I think some buffer
+    # in the camera is involved) and improves responsiveness of our
+    # detection (i.e. much less latency between object entering frame
+    # and this program saying it is there).  Obviously a performance
+    # hit but it we are still within 1 Hz (on my machine).  6 frames
+    # seemed to be just enough but further experiments could be done
+    # to tweek this lower to maybe 4 or 5 but that is probably not
+    # worth it while classification is taking 0.75 seconds
+    num_throw_away_frames = 6
+    for i in xrange(num_throw_away_frames):
+      retval, temp = camera.read()
+
     retval, camera_capture = camera.read()
     file = "test_image.png"
     cv2.imwrite(file, camera_capture)
