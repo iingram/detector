@@ -10,7 +10,7 @@ if __name__ == '__main__':
   # Creates graph from saved GraphDef.
   create_graph()
 
-  for file in sorted(os.listdir(images_dir)):
+  for file in sorted(os.listdir(images_dir), key=str.lower):
     if file.endswith(".jpg") or file.endswith(".JPG"):
       start = time.time() # want to time each cycle. starting stopwatch.
       full_file = os.path.join(images_dir, file)
