@@ -48,12 +48,15 @@ if __name__ == '__main__':
     print('********')
 
     ### uncomment this section if you want to see the images that
-    ### detector classified.  if you do invoke this section, loop will
-    ### pause on each image till keystroke, ESC will quit the program
-    #cv2.imshow('image', camera_capture)
+    ### detector classified.
+    #cv2.imshow('image', camera_capture) 
+    #k = cv2.waitKey(30) & 0xff
+    #if k == 27:  # ESC to quit
+    #    break
+    # use following instead of preceding if you want to pause on each frame
+    # until keystroke
     #k = cv2.waitKey(0)
     #if k == 27:         # wait for ESC key to exit
-    #  cv2.destroyAllWindows()
     #  break
     ### end of optional image display section
 
@@ -64,3 +67,5 @@ if __name__ == '__main__':
     #  file = target_label + "_" + str(detections_count) + ".png"
     #  cv2.imwrite(file, camera_capture)
     ### end of optional image logging section
+cv2.destroyAllWindows()
+cap.release()
