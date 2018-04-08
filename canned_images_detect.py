@@ -6,7 +6,7 @@ import os
 
 images_dir = '/home/ian/Desktop/test'
 
-if __name__ == '__main__':
+def main():
   # Creates graph from saved GraphDef.
   create_graph()
 
@@ -22,3 +22,6 @@ if __name__ == '__main__':
       print('Elapsed Time: ' + str(end - start)) # print out how long this detection cycle took
       
       print('********')
+
+if __name__ == '__main__':
+  main()
