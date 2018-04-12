@@ -143,7 +143,7 @@ def create_graph():
     _ = tf.import_graph_def(graph_def, name='')
 
 
-def run_inference_on_image(image):
+def run_inference_on_image(image, verbose=True):
   """Runs inference on an image.
 
   Args:
@@ -173,7 +173,8 @@ def run_inference_on_image(image):
     predictions = sess.run(softmax_tensor,
                            {'DecodeJpeg/contents:0': image_data})
     end = time.time()
-    print("Time of actual classification: " + str(end-start))
+    if(verbose):
+      print("Time of actual classification: " + str(end-start))
     predictions = np.squeeze(predictions)
 
     # Creates node ID --> English string lookup.
@@ -183,7 +184,8 @@ def run_inference_on_image(image):
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id)
       score = predictions[node_id]
-      print('%s (score = %.5f)' % (human_string, score))
+      if(verbose):
+        print('%s (score = %.5f)' % (human_string, score))
 
   return node_lookup.id_to_string(top_k[0])
 
