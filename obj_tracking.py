@@ -1,20 +1,27 @@
-from detector import *
+# Necessary imports
 import numpy as np
 import time
+import sys
+import os
+import cv2
 
-fgbg = cv2.createBackgroundSubtractorMOG()
+# Get webcam video
+cap = cv2.VideoCapture(0)
 
-images_dir = '/Users/Loaner/Dropbox/animalDetector/image_recognition_training/tf_files'
+# Initialize background filter
+fsbg = cv2.BackgroundSubtractorMOG()
 
-for file in sorted(os.listdir(images_dir), key=str.lower):
-  if file.endswith(".jpg") or file.endswith(".JPG"):
-    full_file = os.path.join(images_dir, file)
-    image = imread(full_file, IMREAD_COLOR )
-    fgmask = fgbg.apply(image)
-    cv2.imshow('frame',fgmask)
-    #imshow( "Display window", image );
-    time.sleep(5)
-    print('********')
+while(1):
+    # Continually apply filter to camera
+    ret, frame = cap.read()
+    fgmask = fsbg.apply(frame)
+
+    # Show results
+    cv2.imshow('Frame', fgmask)
+
+    k = cv2.waitKey(30) & 0xff
+    if k == 27:
+        break
 
 cap.release()
 cv2.destroyAllWindows()
