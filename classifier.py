@@ -45,8 +45,11 @@ from __future__ import division
 from __future__ import print_function
 
 # SETTINGS
-# location of model:
+# location of model and filenames of model and label maps:
 model_dir = '/home/ian/Desktop/Dropbox/animalDetector/imagenet'
+model_file = 'classify_image_graph_def.pb'
+label_map = 'imagenet_2012_challenge_label_map_proto.pbtxt'
+human_label_map = 'imagenet_synset_to_human_label_map.txt'
 # how many predictions to report in output list
 num_top_predictions = 3
 
@@ -76,10 +79,10 @@ class NodeLookup(object):
                uid_lookup_path=None):
     if not label_lookup_path:
       label_lookup_path = os.path.join(
-          model_dir, 'imagenet_2012_challenge_label_map_proto.pbtxt')
+          model_dir, label_map)
     if not uid_lookup_path:
       uid_lookup_path = os.path.join(
-          model_dir, 'imagenet_synset_to_human_label_map.txt')
+          model_dir, human_label_map)
     self.node_lookup = self.load(label_lookup_path, uid_lookup_path)
 
   def load(self, label_lookup_path, uid_lookup_path):
@@ -137,7 +140,7 @@ def create_graph():
   """Creates a graph from saved GraphDef file and returns a saver."""
   # Creates graph from saved graph_def.pb.
   with tf.gfile.FastGFile(os.path.join(
-      model_dir, 'classify_image_graph_def.pb'), 'rb') as f:
+      model_dir, model_file), 'rb') as f:
     graph_def = tf.GraphDef()
     graph_def.ParseFromString(f.read())
     _ = tf.import_graph_def(graph_def, name='')
@@ -181,12 +184,15 @@ def run_inference_on_image(image, verbose=True):
     node_lookup = NodeLookup()
 
     top_k = predictions.argsort()[-num_top_predictions:][::-1]
+    thingsPresent = []
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id)
+      thingsPresent.append(human_string)
       score = predictions[node_id]
       if(verbose):
         print('%s (score = %.5f)' % (human_string, score))
 
-  return node_lookup.id_to_string(top_k[0])
+  #return node_lookup.id_to_string(top_k[0])
+  return thingsPresent
 
 
