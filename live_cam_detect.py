@@ -2,7 +2,7 @@
 
 import cv2
 import detector as dt
-import classifier as cl
+#import classifier as cl
 import time
 
 detections_count = 0 #currently only used if logging frames that detector marked as True
@@ -19,7 +19,7 @@ if __name__ == '__main__':
   ### end camera "warm-up" section
 
   # Creates graph from saved GraphDef.
-  cl.create_graph()
+  #cl.create_graph()
   
   while(1):
     start = time.time() # want to time each cycle. starting stopwatch.
