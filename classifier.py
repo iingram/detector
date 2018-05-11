@@ -139,8 +139,7 @@ class NodeLookup(object):
 def create_graph():
   """Creates a graph from saved GraphDef file and returns a saver."""
   # Creates graph from saved graph_def.pb.
-  with tf.gfile.FastGFile(os.path.join(
-      model_dir, model_file), 'rb') as f:
+  with tf.gfile.FastGFile(os.path.join(model_dir, model_file), 'rb') as f:
     graph_def = tf.GraphDef()
     graph_def.ParseFromString(f.read())
     _ = tf.import_graph_def(graph_def, name='')
@@ -171,10 +170,12 @@ def run_inference_on_image(image, verbose=True):
     # 'DecodeJpeg/contents:0': A tensor containing a string providing JPEG
     #   encoding of the image.
     # Runs the softmax tensor by feeding the image_data as input to the graph.
+
     softmax_tensor = sess.graph.get_tensor_by_name('softmax:0')
+
     start = time.time()
-    predictions = sess.run(softmax_tensor,
-                           {'DecodeJpeg/contents:0': image_data})
+    predictions = sess.run(softmax_tensor, {'DecodeJpeg/contents:0': image_data})
+    
     end = time.time()
     if(verbose):
       print("Time of actual classification: " + str(end-start))
