@@ -1,7 +1,8 @@
 # runs detector on successive images stored in a directory
 
 import detector as dt
-import classifier as cl
+#import classifier as cl
+import classifier_wRetraining as clwR
 import time
 import os
 
@@ -9,7 +10,8 @@ images_dir = '/home/ian/Desktop/test'
 
 def main():
   # Creates graph from saved GraphDef.
-  cl.create_graph()
+  #cl.create_graph()
+  clwR.load_graph()
 
   for file in sorted(os.listdir(images_dir), key=str.lower):
     if file.endswith(".jpg") or file.endswith(".JPG"):
