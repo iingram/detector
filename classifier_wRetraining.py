@@ -24,10 +24,13 @@ import argparse
 import numpy as np
 import tensorflow as tf
 
+import globals
+
 model_file = "/home/ian/Desktop/retrain/retrainingExample/output_graph.pb"
 label_file = "/home/ian/Desktop/retrain/retrainingExample/output_labels.txt"
 
 def load_graph():
+  global graph
   graph = tf.Graph()
   graph_def = tf.GraphDef()
 
@@ -77,7 +80,8 @@ def load_labels(label_file):
 
 
 def run_inference_on_image(file_name):
-
+  global graph
+    
   input_height = 299
   input_width = 299
   input_mean = 0
@@ -88,7 +92,7 @@ def run_inference_on_image(file_name):
   output_layer = "final_result"
 
   #graph = load_graph(model_file)
-  graph = load_graph()
+  #graph = load_graph()
   t = read_tensor_from_image_file(
       file_name,
       input_height=input_height,
