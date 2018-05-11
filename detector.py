@@ -19,7 +19,7 @@
 # - detection criterion is: is the target label the very highest ranked prediction
 
 #import classifier as cl
-import classifier_wRetraining as cl
+import classifier_wRetraining as clwR
 
 target_filename = "example_target_file.txt"
 
