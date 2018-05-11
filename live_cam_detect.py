@@ -6,8 +6,6 @@ import detector as dt
 import classifier_wRetraining as clwR
 import time
 
-import globals
-
 detections_count = 0 #currently only used if logging frames that detector marked as True
 
 if __name__ == '__main__':
@@ -24,7 +22,7 @@ if __name__ == '__main__':
 
   # Creates graph from saved GraphDef.
   #cl.create_graph()
-  graph = clwR.load_graph()
+  clwR.load_graph()
   
   while(1):
     start = time.time() # want to time each cycle. starting stopwatch.

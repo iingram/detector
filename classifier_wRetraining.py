@@ -24,7 +24,7 @@ import argparse
 import numpy as np
 import tensorflow as tf
 
-import globals
+graph = None
 
 model_file = "/home/ian/Desktop/retrain/retrainingExample/output_graph.pb"
 label_file = "/home/ian/Desktop/retrain/retrainingExample/output_labels.txt"
@@ -38,8 +38,6 @@ def load_graph():
     graph_def.ParseFromString(f.read())
   with graph.as_default():
     tf.import_graph_def(graph_def)
-
-  return graph
 
 
 def read_tensor_from_image_file(file_name,
