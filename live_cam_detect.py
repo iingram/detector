@@ -1,13 +1,14 @@
 # runs detector on successive images captured from webcam 
 
 import cv2
-from detector import *
+import detector as dt
+import classifier as cl
 import time
 
 detections_count = 0 #currently only used if logging frames that detector marked as True
 
 if __name__ == '__main__':
-  camera_port = 0 
+  camera_port = 0
   camera = cv2.VideoCapture(camera_port)
 
   # solves a bug where camera's auto-exposure won't have taken action
@@ -18,7 +19,7 @@ if __name__ == '__main__':
   ### end camera "warm-up" section
 
   # Creates graph from saved GraphDef.
-  create_graph()
+  cl.create_graph()
   
   while(1):
     start = time.time() # want to time each cycle. starting stopwatch.
@@ -39,7 +40,7 @@ if __name__ == '__main__':
     retval, camera_capture = camera.read()
     file = "test_image.png"
     cv2.imwrite(file, camera_capture)
-    vote, target_label = detector('test_image.png')
+    vote, target_label = dt.detector('test_image.png')
     print(target_label + ' is present.')
     
     end = time.time()
@@ -52,7 +53,7 @@ if __name__ == '__main__':
     #cv2.imshow('image', camera_capture) 
     #k = cv2.waitKey(30) & 0xff
     #if k == 27:  # ESC to quit
-    #    break
+    #  break
     # use following instead of preceding if you want to pause on each frame
     # until keystroke
     #k = cv2.waitKey(0)

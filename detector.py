@@ -18,7 +18,7 @@
 # - model is hardcoded into classifier.py
 # - detection criterion is: is the target label the very highest ranked prediction
 
-from classifier import *
+import classifier as cl
 
 target_filename = "example_target_file.txt"
 
@@ -29,7 +29,7 @@ with open(target_filename, 'r') as f:
 
 
 def detector(image):
-  veryToppist = run_inference_on_image(image)
+  veryToppist = cl.run_inference_on_image(image)
 
   # check for any of the target_labels in the category with highest
   # score from classifier.  provide label of match for use by apps.
