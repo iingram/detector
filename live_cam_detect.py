@@ -6,12 +6,12 @@ import detector as dt
 import classifier_wRetraining as clwR
 import time
 
-detections_count = 0 #currently only used if logging frames that detector marked as True
+CAMERA_PORT = 0
+DETECTIONS_COUNT = 0 #currently only used if logging frames that detector marked as True
 
 if __name__ == '__main__':
   
-  camera_port = 0
-  camera = cv2.VideoCapture(camera_port)
+  camera = cv2.VideoCapture(CAMERA_PORT)
 
   # solves a bug where camera's auto-exposure won't have taken action
   # until after a healthy number of frames have been captured
@@ -67,8 +67,8 @@ if __name__ == '__main__':
     ### uncomment this section if you want the program to save all
     ### images for which detector has voted True
     #if(vote):
-    #  detections_count += 1
-    #  file = target_label + "_" + str(detections_count) + ".png"
+    #  DETECTIONS_COUNT += 1
+    #  file = target_label + "_" + str(DETECTIONS_COUNT) + ".png"
     #  cv2.imwrite(file, camera_capture)
     ### end of optional image logging section
 cv2.destroyAllWindows()
