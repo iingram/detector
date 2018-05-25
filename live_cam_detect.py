@@ -53,10 +53,10 @@ if __name__ == '__main__':
 
     ### uncomment this section if you want to see the images that
     ### detector classified.
-    #cv2.imshow('image', camera_capture) 
-    #k = cv2.waitKey(30) & 0xff
-    #if k == 27:  # ESC to quit
-    #  break
+    cv2.imshow('image', camera_capture) 
+    k = cv2.waitKey(30) & 0xff
+    if k == 27:  # ESC to quit
+      break
     # use following instead of preceding if you want to pause on each frame
     # until keystroke
     #k = cv2.waitKey(0)
