@@ -1,3 +1,5 @@
+# -*- python-indent-offset: 2; -*-
+
 # runs detector on successive images captured from webcam 
 
 import cv2
@@ -10,10 +12,10 @@ import argparse
 # argument handling
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    '--camera',
-    type=int,
-    default='0',
-    help='Number of camera to use.'
+  '--camera',
+  type=int,
+  default='0',
+  help='Number of camera to use.'
 )
 args = parser.parse_args()
 # end argument handling
@@ -24,18 +26,18 @@ DETECTIONS_COUNT = 0 #currently only used if logging frames that detector marked
 if __name__ == '__main__':
   
   camera = cv2.VideoCapture(CAMERA_PORT)
-
+  
   # solves a bug where camera's auto-exposure won't have taken action
   # until after a healthy number of frames have been captured
   ramp_frames = 30
   for i in xrange(ramp_frames):
     retval, temp = camera.read()
   ### end camera "warm-up" section
-
+  
   # Creates graph from saved GraphDef.
   #cl.create_graph()
   clwR.load_graph()
-  
+    
   while(1):
     start = time.time() # want to time each cycle. starting stopwatch.
 
