@@ -5,8 +5,20 @@ import detector as dt
 #import classifier as cl
 import classifier_wRetraining as clwR
 import time
+import argparse
 
-CAMERA_PORT = 0
+# argument handling
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    '--camera',
+    type=int,
+    default='0',
+    help='Number of camera to use.'
+)
+args = parser.parse_args()
+# end argument handling
+
+CAMERA_PORT = args.camera
 DETECTIONS_COUNT = 0 #currently only used if logging frames that detector marked as True
 
 if __name__ == '__main__':
