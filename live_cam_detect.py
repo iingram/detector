@@ -12,6 +12,7 @@ import argparse
 # argument handling
 parser = argparse.ArgumentParser()
 parser.add_argument(
+  '-c',
   '--camera',
   type=int,
   default='0',
