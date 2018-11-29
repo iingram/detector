@@ -74,15 +74,11 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 class NodeLookup(object):
   """Converts integer node ID's to human readable labels."""
 
-  def __init__(self,
-               label_lookup_path=None,
-               uid_lookup_path=None):
+  def __init__(self, label_lookup_path=None, uid_lookup_path=None):
     if not label_lookup_path:
-      label_lookup_path = os.path.join(
-          model_dir, label_map)
+      label_lookup_path = os.path.join(model_dir, label_map)
     if not uid_lookup_path:
-      uid_lookup_path = os.path.join(
-          model_dir, human_label_map)
+      uid_lookup_path = os.path.join(model_dir, human_label_map)
     self.node_lookup = self.load(label_lookup_path, uid_lookup_path)
 
   def load(self, label_lookup_path, uid_lookup_path):
