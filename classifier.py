@@ -53,21 +53,21 @@ human_label_map = 'imagenet_synset_to_human_label_map.txt'
 # how many predictions to report in output list
 num_top_predictions = 3
 
-import argparse
+#import argparse
 import os.path
 import re
-import sys
-import tarfile
+#import sys
+#import tarfile
 import time
 
 import numpy as np
-from six.moves import urllib
+#from six.moves import urllib
 import tensorflow as tf
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 # pylint: disable=line-too-long
-DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
+#DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
 # pylint: enable=line-too-long
 
 
