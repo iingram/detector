@@ -29,6 +29,9 @@ graph = None
 model_file = "/home/ian/Desktop/retrain/retrainingExample/output_graph.pb"
 label_file = "/home/ian/Desktop/retrain/retrainingExample/output_labels.txt"
 
+NUM_TARGET_TO_RETURN = 1 # hack. for lichen wanted to return second item in list
+print("\n WARNING: RETURNING SECOND ITEM FROM DETECTED LIST!")
+
 def load_graph():
   global graph
   graph = tf.Graph()
@@ -113,4 +116,4 @@ def run_inference_on_image(file_name):
   labels = load_labels(label_file)
   for i in top_k:
     print(labels[i], results[i])
-  return labels[top_k[0]]  
+  return labels[top_k[NUM_TARGET_TO_RETURN]]  
