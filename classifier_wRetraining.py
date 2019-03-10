@@ -26,8 +26,8 @@ import tensorflow as tf
 
 graph = None
 
-model_file = "/home/ian/Desktop/retrain/retrainingExample/output_graph.pb"
-label_file = "/home/ian/Desktop/retrain/retrainingExample/output_labels.txt"
+model_file = "/home/ian/Desktop/retrain/retrainingExample/current_graph.pb"
+label_file = "/home/ian/Desktop/retrain/retrainingExample/current_labels.txt"
 
 NUM_TARGET_TO_RETURN = 1 # hack. for lichen wanted to return second item in list
 print("\n WARNING: RETURNING SECOND ITEM FROM DETECTED LIST!")
